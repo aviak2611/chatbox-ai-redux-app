@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# 🤖 Chatbox AI Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 Overview
 
-## Available Scripts
+This is a full-stack Chatbox application that allows users to interact with AI in real-time.
+Users can send messages and receive AI-generated responses instantly through API integration.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **Frontend:** React, Redux Toolkit
+* **Backend:** Node.js, Express
+* **API:** OpenRouter AI API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## ✨ Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* 💬 Real-time AI chat interaction
+* 🧠 Global state management using Redux Toolkit
+* ⚡ Async API handling using createAsyncThunk
+* ⏳ Loading indicator for better user experience
+* ❌ Error handling with retry functionality
+* 📱 Responsive UI (mobile + desktop)
+* 🔐 Secure API integration via backend
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔄 Project Flow
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. User enters message
+2. Frontend sends request to backend
+3. Backend calls AI API
+4. AI response is received
+5. Redux updates state
+6. UI displays the response
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📸 Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+(Add your screenshots here)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ▶️ Run Locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 1️⃣ Clone the Repository
 
-## Learn More
+```bash
+git clone https://github.com/aviak2611/chatbox-ai-redux-app.git
+cd chatbox-ai-redux-app
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2️⃣ Install Frontend Dependencies
 
-### Code Splitting
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### 3️⃣ Start Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 4️⃣ Setup Backend
 
-### Advanced Configuration
+Open a new terminal:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+cd server
+npm install
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 5️⃣ Create .env File (inside server folder)
 
-### `npm run build` fails to minify
+```env
+OPENROUTER_API_KEY=your_api_key_here
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+### 6️⃣ Start Backend
+
+```bash
+npm start
+```
+
+---
+
+## 🔐 Security
+
+* API keys are stored securely using `.env`
+* `.env` file is excluded using `.gitignore`
+* Backend acts as a secure middleware
+
+---
+
+## 💡 Key Learnings
+
+* Managed global state using Redux Toolkit
+* Handled asynchronous API calls using createAsyncThunk
+* Built full-stack communication between frontend and backend
+* Implemented proper error handling and loading states
+* Learned secure API handling practices
+
+---
+
+## 🚀 Future Improvements
+
+* User authentication (login/signup)
+* Store chat history using MongoDB
+* Streaming responses (typing effect like ChatGPT)
+* UI enhancements with timestamps and chat bubbles
+
+---
+
+## 🙌 Acknowledgment
+
+This project was built as part of a technical assignment to demonstrate full-stack development and state management skills.
