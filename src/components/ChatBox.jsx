@@ -1,23 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { sendMessage } from "../redux/chatslice";
 import Message from "./Message";
 import Loader from "./Loader";
 import InputBox from "./InputBox";
 
 const ChatBox = () => {
   const { messages, loading, error } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
 
   const chatContainerRef = useRef(null);
-  const bottomRef = useRef(null); 
+  const bottomRef = useRef(null);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    setTimeout(() => {
-      bottomRef.current?.scrollIntoView({
-        behavior: "smooth",
-      });
+    const t = setTimeout(() => {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
+    return () => clearTimeout(t);
   }, [messages, loading]);
 
   useEffect(() => {
@@ -27,15 +28,29 @@ const ChatBox = () => {
   }, []);
 
   const getStatusColor = () => {
-    if (error) return "#ef4444";     
-    if (loading) return "#f59e0b";   
-    return "#22c55e";               
+    if (error) return "#ef4444";
+    if (loading) return "#f59e0b";
+    return "#22c55e";
   };
 
   const getStatusText = () => {
     if (error) return "Server Error";
     if (loading) return "AI Thinking...";
     return "Online";
+  };
+
+  // 🔁 Retry handler
+  const handleRetry = () => {
+    if (loading) return; // prevent duplicate calls
+
+    // find last user message
+    const lastUserMessage = [...messages]
+      .reverse()
+      .find((msg) => msg.role === "user");
+
+    if (lastUserMessage?.content?.trim()) {
+      dispatch(sendMessage(lastUserMessage.content));
+    }
   };
 
   return (
@@ -124,7 +139,7 @@ const ChatBox = () => {
           </div>
 
           <div
-            title={getStatusText()} 
+            title={getStatusText()}
             style={{
               width: "10px",
               height: "10px",
@@ -136,6 +151,7 @@ const ChatBox = () => {
           />
         </div>
 
+        {/* CHAT BODY */}
         <div
           ref={chatContainerRef}
           style={{
@@ -158,7 +174,12 @@ const ChatBox = () => {
           )}
 
           {messages.map((msg, index) => (
-            <Message key={index} message={msg} isMobile={isMobile} isLatest={index === messages.length - 1} />
+            <Message
+              key={index}
+              message={msg}
+              isMobile={isMobile}
+              isLatest={index === messages.length - 1}
+            />
           ))}
 
           {loading && <Loader />}
@@ -179,9 +200,11 @@ const ChatBox = () => {
                 justifyContent: "space-between",
               }}
             >
-               {error}
+              <span>⚠ {error}</span>
 
               <button
+                onClick={handleRetry}
+                disabled={loading}
                 style={{
                   width: isMobile ? "100%" : "auto",
                   background: "#ef4444",
@@ -189,7 +212,8 @@ const ChatBox = () => {
                   border: "none",
                   padding: "8px 12px",
                   borderRadius: "8px",
-                  cursor: "pointer",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  opacity: loading ? 0.7 : 1,
                 }}
               >
                 Retry
